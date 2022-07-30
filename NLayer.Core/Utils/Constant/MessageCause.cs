@@ -1,4 +1,4 @@
-﻿namespace NLayer.Core.Utils;
+﻿namespace NLayer.Core.Utils.Constant;
 
 public static class MessageCause
 {
