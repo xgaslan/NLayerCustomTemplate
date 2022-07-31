@@ -19,7 +19,7 @@ public interface IService<T> where T : class, new()
     #endregion
 
     #region Get All
-    Task<IEnumerable<T>> GetAll(CancellationToken cancellationToken);
+    Task<List<T>> GetAll(CancellationToken cancellationToken);
     #endregion
 
     #region Where

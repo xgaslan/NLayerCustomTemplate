@@ -1,19 +1,23 @@
 ﻿using NLayer.Core.UnitOfWork;
+using NLayer.Repository.Context;
 
 namespace NLayer.Repository.UnitOfWork;
 
 public class UnitOfWork : IUnitOfWork
 {
-    //TODO Context instance alınacak ctor oluşturulacak
+    private readonly BaseContext _context;
+
+    public UnitOfWork(BaseContext context)
+    {
+        _context = context;
+    }
     public async Task CommitAsync()
     {
-        //await _context.SaveChangesAsync();
-        throw new NotImplementedException();
+        await _context.SaveChangesAsync();
     }
 
     public void Commit()
     {
-        //_context.SaveChanges();
-        throw new NotImplementedException();
+        _context.SaveChanges();
     }
 }

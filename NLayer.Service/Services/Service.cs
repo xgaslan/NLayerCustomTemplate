@@ -21,6 +21,7 @@ public class Service<T> : IService<T> where T : class, new()
         _mapper = mapper;
     }
 
+
     public async Task<T> AddAsync(T entity, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
@@ -31,7 +32,7 @@ public class Service<T> : IService<T> where T : class, new()
         throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<T>> GetAll(CancellationToken cancellationToken)
+    public async Task<List<T>> GetAll(CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

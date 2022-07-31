@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using NLayer.Core.Repositories;
 using NLayer.Core.Services;
 using NLayer.Core.UnitOfWork;
+using NLayer.Repository.Context;
 using NLayer.Repository.Repositories;
 using NLayer.Service.Mapping;
 using NLayer.Service.Services;
@@ -22,13 +23,13 @@ builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
 //TODO DbContext eklenince acilacak
-//builder.Services.AddDbContext<BaseContext>(
-//    db => db.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"))
-//);
+builder.Services.AddDbContext<BaseContext>(
+    db => db.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"))
+);
 
 builder.Services.AddCors(c =>
-    c.AddPolicy("AllowCustomPolicies", 
-        builder => 
+    c.AddPolicy("AllowCustomPolicies",
+        builder =>
             builder.AllowAnyOrigin().
                 AllowAnyMethod()
                 .AllowAnyHeader()
