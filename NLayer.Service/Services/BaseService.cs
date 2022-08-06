@@ -7,14 +7,14 @@ using NLayer.Core.UnitOfWork;
 
 namespace NLayer.Service.Services;
 
-public class Service<T> : IService<T> where T : class, new()
+public class BaseService<T> : IBaseService<T> where T : class,  new()
 {
-    private readonly IRepository<T> _repository;
+    private readonly IBaseRepository<T> _repository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     private readonly IExceptionManager _exceptionManager;
 
-    public Service(IRepository<T> repository, IUnitOfWork unitOfWork, IMapper mapper)
+    public BaseService(IBaseRepository<T> repository, IUnitOfWork unitOfWork, IMapper mapper)
     {
         _repository = repository;
         _unitOfWork = unitOfWork;

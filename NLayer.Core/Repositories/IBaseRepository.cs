@@ -1,13 +1,14 @@
 ﻿using System.Linq.Expressions;
+using NLayer.Core.Entities;
 
 namespace NLayer.Core.Repositories;
 
-public interface IRepository<T> where T : class, new()
+public interface IBaseRepository<TEntity> where TEntity : class, IBaseEntity, new()
 {
     #region Create
 
     #region Add Async
-    Task<T> AddAsync(T entity);
+    Task<TEntity> AddAsync(TEntity entity);
     #endregion
 
     #endregion
@@ -15,19 +16,19 @@ public interface IRepository<T> where T : class, new()
     #region Read
 
     #region Get By Id Async
-    Task<T> GetByIdAsync(int id);
+    Task<TEntity?> GetByIdAsync(int id);
     #endregion
 
     #region Get All
-    IQueryable<T> GetAll();
+    IQueryable<TEntity> GetAll();
     #endregion
 
     #region Where
-    IQueryable<T> Where(Expression<Func<T, bool>> filter);
+    IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> filter);
     #endregion
 
     #region Any Async
-    Task<bool> AnyAsync(Expression<Func<T, bool>> filter);
+    Task<bool> AnyAsync(Expression<Func<TEntity, bool>> filter);
     #endregion
 
     #endregion
@@ -35,7 +36,7 @@ public interface IRepository<T> where T : class, new()
     #region Update
 
     #region Update 
-    void Update(T entity);
+    void Update(TEntity entity);
     #endregion
 
     #endregion
@@ -43,7 +44,7 @@ public interface IRepository<T> where T : class, new()
     #region Delete
 
     #region Delete
-    void Delete(T entity); 
+    void Delete(TEntity entity); 
     #endregion
 
     #endregion
