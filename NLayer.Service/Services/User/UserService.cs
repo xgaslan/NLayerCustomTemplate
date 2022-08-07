@@ -25,17 +25,30 @@ public class UserService : IUserService
 
     #endregion
 
+    #region Create
     public async Task<UserModel> AddAsync(Entity.User entity, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
-    }
+        var checkUserExist = await this._unitOfWork.UserRepository.AnyAsync(
+            u => u.FirstName == entity.FirstName
+                 && u.LastName == entity.LastName
+                 && u.Email == entity.Email, cancellationToken);
+        if (checkUserExist)
+        {
+            throw new Exception("ALREADY EXIST");
+        }
 
-    public async Task<UserModel> GetByIdAsync(int id, CancellationToken cancellationToken)
+        var user = await this._unitOfWork.UserRepository.AddAsync(entity, cancellationToken);
+        var userToModel = this._mapper.Map<Entity.User, UserModel>(user);
+        return userToModel;
+    }
+    #endregion
+
+    public async Task<UserModel?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
         var getUserById = await _unitOfWork.UserRepository.GetByIdAsync(id, cancellationToken);
         if (getUserById == null)
         {
-            throw new Exception("NOT FOUND");
+            return null;
         }
 
         var userServiceModel = _mapper.Map<Entity.User, UserModel>(getUserById);
@@ -55,8 +68,17 @@ public class UserService : IUserService
         throw new NotImplementedException();
     }
 
-    public async Task Delete(Entity.User entity, CancellationToken cancellationToken)
+    public async Task<bool> Delete(int id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var getUserById = await this._unitOfWork.UserRepository.Where(u => u.Id == id && !u.IsDeleted).SingleOrDefaultAsync(cancellationToken);
+        if (getUserById == null)
+        {
+            return false;
+        }
+        getUserById.IsDeleted = true;
+        this._unitOfWork.UserRepository.Update(getUserById);
+        await this._unitOfWork.CommitAsync(cancellationToken);
+        return true;
+
     }
 }

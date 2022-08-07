@@ -40,7 +40,7 @@ public class CategoryService : ICategoryService
         throw new NotImplementedException();
     }
 
-    public async Task Delete(Entity.Category entity, CancellationToken cancellationToken)
+    public async Task<bool> Delete(int id, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

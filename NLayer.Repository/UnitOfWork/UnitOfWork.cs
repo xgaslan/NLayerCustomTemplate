@@ -23,9 +23,9 @@ public class UnitOfWork : IUnitOfWork
     public IProductRepository ProductRepository => _productRepository ??= new ProductRepository(_context);
     public IUserRepository UserRepository => _userRepository ??= new UserRepository(_context);
 
-    public async Task CommitAsync()
+    public async Task CommitAsync(CancellationToken cancellationToken)
     {
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
     public void Commit()

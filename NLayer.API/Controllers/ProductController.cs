@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace NLayer.API.Controllers.Product
+namespace NLayer.API.Controllers
 {
     [Route("api/product")]
     [ApiController]

@@ -30,7 +30,7 @@ public interface IBaseService<TEntityView, TEntityService>
 
     #region Delete
 
-    Task Delete(TEntityView entity, CancellationToken cancellationToken);
+    Task<bool> Delete(int id, CancellationToken cancellationToken);
 
     #endregion
 }

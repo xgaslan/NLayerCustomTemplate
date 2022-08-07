@@ -9,6 +9,6 @@ public interface IUnitOfWork
     ICategoryRepository CategoryRepository { get; }
     IProductRepository ProductRepository { get; }
     IUserRepository UserRepository { get; }
-    Task CommitAsync();
+    Task CommitAsync(CancellationToken cancellationToken);
     void Commit();
 }
