@@ -2,7 +2,7 @@
 
 namespace NLayer.Service.Services.Category;
 
-public interface ICategoryService : IBaseService<CategoryViewModel, CategoryServiceModel>
+public interface ICategoryService : IBaseService<Entity.Category, CategoryModel>
 {
     
 }

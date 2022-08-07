@@ -2,7 +2,7 @@
 
 namespace NLayer.Service.Services.Product;
 
-public class ProductViewModel : IBaseDto
+public class ProductViewModel : IBaseViewDto
 {
     
 }

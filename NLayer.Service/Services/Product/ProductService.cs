@@ -21,55 +21,29 @@ public class ProductService : IProductService
     }
 
     #endregion
-    
-    #region Create
-    
-    public async Task<ProductServiceModel> AddAsync(ProductViewModel entity, CancellationToken cancellationToken)
+
+    public async Task<ProductModel> AddAsync(Entity.Product entity, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    #endregion
-
-    #region Read
-
-    public async Task<ProductServiceModel> GetByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<ProductModel> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<List<ProductServiceModel>> GetAll(CancellationToken cancellationToken)
+    public async Task<List<ProductModel>> GetAll(CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public IQueryable<ProductServiceModel> Where(Expression<Func<ProductViewModel, bool>> filter, CancellationToken cancellationToken)
+    public async Task<ProductModel> Update(Entity.Product entity, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<bool> AnyAsync(Expression<Func<ProductViewModel, bool>> filter, CancellationToken cancellationToken)
+    public async Task Delete(Entity.Product entity, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
-
-    #endregion
-
-    #region Update
-
-    public async Task<ProductServiceModel> Update(ProductViewModel entity, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    #endregion
-
-    #region Delete
-
-    public async Task Delete(ProductViewModel entity, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    } 
-
-    #endregion
 }

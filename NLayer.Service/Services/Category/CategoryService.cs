@@ -19,54 +19,29 @@ public class CategoryService : ICategoryService
     }
     #endregion
 
-    #region Create
 
-    public async Task<CategoryServiceModel> AddAsync(CategoryViewModel categoryViewModel, CancellationToken cancellationToken)
+    public async Task<CategoryModel> AddAsync(Entity.Category entity, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    #endregion
-    
-    #region Read
-    
-    public async Task<CategoryServiceModel> GetByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<CategoryModel> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<List<CategoryServiceModel>> GetAll(CancellationToken cancellationToken)
+    public async Task<List<CategoryModel>> GetAll(CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public IQueryable<CategoryServiceModel> Where(Expression<Func<CategoryViewModel, bool>> filter, CancellationToken cancellationToken)
+    public async Task<CategoryModel> Update(Entity.Category entity, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<bool> AnyAsync(Expression<Func<CategoryViewModel, bool>> filter, CancellationToken cancellationToken)
+    public async Task Delete(Entity.Category entity, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
-
-    #endregion
-    
-    #region Update
-    
-    public async Task<CategoryServiceModel> Update(CategoryViewModel categoryViewModel, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    #endregion
-
-    #region Delete
-
-    public async Task Delete(CategoryViewModel categoryViewModel, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    } 
-
-    #endregion
 }

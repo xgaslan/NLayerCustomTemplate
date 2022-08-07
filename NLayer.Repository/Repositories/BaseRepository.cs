@@ -29,12 +29,12 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
 
     #region Add Async
 
-    public async Task<TEntity> AddAsync(TEntity entity)
+    public async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken)
     {
-        var addedEntity = await _dbSet.AddAsync(entity);
+        var addedEntity = await _dbSet.AddAsync(entity, cancellationToken);
         addedEntity.Entity.CreatedAt = DateTime.Now;
         addedEntity.Entity.ChangedAt = DateTime.Now;
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
         return addedEntity.Entity;
     }
 
@@ -45,17 +45,25 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     #region Read
 
     #region Get By Id Async
-    public async Task<TEntity?> GetByIdAsync(int id)
+    public async Task<TEntity?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        var getEntityById = await _dbSet.FindAsync(id);
+        var getEntityById = await _dbSet.Where(e => e.Id == id).SingleOrDefaultAsync(cancellationToken);
         return getEntityById;
     }
     #endregion
 
     #region Get All
-    public IQueryable<TEntity> GetAll()
+    public IQueryable<TEntity> GetAll(bool includeDeleted = false)
     {
-        throw new NotImplementedException();
+        IQueryable<TEntity> queryableEntities;
+        if (!includeDeleted)
+        {
+            queryableEntities = _dbSet.Where(e => !e.IsDeleted).AsNoTracking().AsQueryable();
+            return queryableEntities;
+        }
+
+        queryableEntities = _dbSet.AsNoTracking().AsQueryable();
+        return queryableEntities;
     }
     #endregion
 
@@ -68,9 +76,9 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     #endregion
 
     #region Any Async
-    public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> filter)
+    public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken)
     {
-        var checkEntityExist = await _dbSet.AnyAsync(filter);
+        var checkEntityExist = await _dbSet.AnyAsync(filter, cancellationToken);
         return checkEntityExist;
     }
     #endregion
@@ -84,7 +92,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     {
         entity.ChangedAt = DateTime.Now;
         _dbSet.Update(entity);
-        
+
     }
     #endregion
 
@@ -96,8 +104,8 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     public void Delete(TEntity entity)
     {
         _dbSet.Remove(entity);
-    }  
+    }
     #endregion
-    
+
     #endregion
 }

@@ -7,45 +7,31 @@ public interface IBaseRepository<TEntity> where TEntity : class, IBaseEntity, ne
 {
     #region Create
 
-    #region Add Async
-    Task<TEntity> AddAsync(TEntity entity);
-    #endregion
+    Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken);
 
     #endregion
 
     #region Read
-
-    #region Get By Id Async
-    Task<TEntity?> GetByIdAsync(int id);
-    #endregion
-
-    #region Get All
-    IQueryable<TEntity> GetAll();
-    #endregion
-
-    #region Where
+    
+    Task<TEntity?> GetByIdAsync(int id, CancellationToken cancellationToken);
+    
+    IQueryable<TEntity> GetAll(bool includeDeleted = false);
+   
     IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> filter);
-    #endregion
-
-    #region Any Async
-    Task<bool> AnyAsync(Expression<Func<TEntity, bool>> filter);
-    #endregion
-
+   
+    Task<bool> AnyAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken);
+    
     #endregion
 
     #region Update
 
-    #region Update 
     void Update(TEntity entity);
-    #endregion
 
     #endregion
 
     #region Delete
 
-    #region Delete
-    void Delete(TEntity entity); 
-    #endregion
+    void Delete(TEntity entity);
 
     #endregion
 }

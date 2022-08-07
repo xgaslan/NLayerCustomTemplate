@@ -27,7 +27,7 @@ namespace NLayer.Repository.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(AppSettingsConfig.Configuration.GetConnectionString("SqlConnection"));
+                optionsBuilder.UseSqlServer("Data Source=MEKROG;Initial Catalog=NLayer;User ID=gaslan;Password=HYI3XeL9;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 

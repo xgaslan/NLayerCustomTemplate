@@ -2,7 +2,7 @@
 
 namespace NLayer.Repository.Repositories.Category;
 
-public interface ICategoryRepository : IBaseRepository<Entity.Category>, IBaseRepositoryExtension<Entity.Category>
+public interface ICategoryRepository : IBaseRepository<Entity.Category>
 {
     
 }

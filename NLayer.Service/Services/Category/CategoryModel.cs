@@ -2,7 +2,7 @@
 
 namespace NLayer.Service.Services.Category;
 
-public class CategoryServiceModel : IBaseDto
+public class CategoryModel : IBaseModelDto
 {
     
 }

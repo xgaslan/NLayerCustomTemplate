@@ -2,7 +2,7 @@
 
 namespace NLayer.Repository.Repositories.Product;
 
-public interface IProductRepository : IBaseRepository<Entity.Product>, IBaseRepositoryExtension<Entity.Product>
+public interface IProductRepository : IBaseRepository<Entity.Product>
 {
     
 }

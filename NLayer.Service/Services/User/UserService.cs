@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using NLayer.Core.UnitOfWork;
+using NLayer.Repository.Repositories;
 
 namespace NLayer.Service.Services.User;
 
@@ -23,54 +25,38 @@ public class UserService : IUserService
 
     #endregion
 
-    #region Create
-
-    public async Task<UserServiceModel> AddAsync(UserViewModel entity, CancellationToken cancellationToken)
+    public async Task<UserModel> AddAsync(Entity.User entity, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    #endregion
+    public async Task<UserModel> GetByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        var getUserById = await _unitOfWork.UserRepository.GetByIdAsync(id, cancellationToken);
+        if (getUserById == null)
+        {
+            throw new Exception("NOT FOUND");
+        }
 
-    #region Read
+        var userServiceModel = _mapper.Map<Entity.User, UserModel>(getUserById);
 
-    public async Task<UserServiceModel> GetByIdAsync(int id, CancellationToken cancellationToken)
+        return userServiceModel;
+    }
+
+    public async Task<List<UserModel>> GetAll(CancellationToken cancellationToken)
+    {
+        var getAllUsers = await _unitOfWork.UserRepository.GetAll().ToListAsync(cancellationToken);
+        var userServiceModel = _mapper.Map<List<Entity.User>, List<UserModel>>(getAllUsers);
+        return userServiceModel;
+    }
+
+    public async Task<UserModel> Update(Entity.User entity, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<List<UserServiceModel>> GetAll(CancellationToken cancellationToken)
+    public async Task Delete(Entity.User entity, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
-
-    public IQueryable<UserServiceModel> Where(Expression<Func<UserViewModel, bool>> filter, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<bool> AnyAsync(Expression<Func<UserViewModel, bool>> filter, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    #endregion
-
-    #region Update
-
-    public async Task<UserServiceModel> Update(UserViewModel entity, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    #endregion
-
-    #region Delete
-
-    public async Task Delete(UserViewModel entity, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    } 
-
-    #endregion
 }
